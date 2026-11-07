@@ -1,0 +1,39 @@
+__pycache__/
+*.py[cod]
+*.db
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+node_modules/
+frontend/node_modules/
+frontend/dist/
+backend/.pytest_cache/
+.pytest_cache/
+
+# Local credentials and demo data
+DEMO_CREDENTIALS.txt
+*.pem
+*.key
+*.crt
+
+# Generated artifacts and reports
+exports/
+*.pdf
+*.docx
+coverage/
+.coverage
+
+# Frontend/deployment tooling
+.vercel/
+*.log
+
+# Editor and OS files
+.vscode/*
+!.vscode/extensions.json
+.agents/
+unslop/
+.idea/
+.DS_Store
+Thumbs.db
