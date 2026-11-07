@@ -1,4 +1,6 @@
 # AI Lesson Studio
+<img width="1163" height="620" alt="image" src="https://github.com/user-attachments/assets/21e889e3-cb58-4a1f-9a02-689164d914c6" />
+
 
 AI Lesson Studio is a full-stack lesson design workspace. The React + TypeScript client connects to a FastAPI API. The platform researches websites, books and YouTube videos, generates source-grounded lessons with Groq, runs two independent quality reviews, records instructor revisions, and exports the final lesson and QC reports.
 
