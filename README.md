@@ -91,7 +91,7 @@ Open http://localhost:5173. Create an instructor account and a lesson. API docum
 - GROQ_API_KEY and GROQ_MODEL: Groq credentials and model used for generation and both QC calls. Keep the key in the root .env file; do not add it to frontend variables or log it.
 - GROQ_TIMEOUT: per-request timeout in seconds; defaults to 120.
 - GROQ_MAX_RETRIES: bounded retries for rate limits, transient server errors and connection timeouts; defaults to 2. HTTP 429 responses honor Retry-After up to 60 seconds.
-- GROQ_MAX_COMPLETION_TOKENS and GROQ_QC_MAX_COMPLETION_TOKENS: output limits for lesson generation and each QC report, respectively. Defaults (2,500 and 1,400) keep requests within common Groq free-tier token limits while allowing larger values for accounts with higher limits.
+- GROQ_MAX_COMPLETION_TOKENS and GROQ_QC_MAX_COMPLETION_TOKENS: output limits for lesson generation and each QC report, respectively. Defaults (2,500 and 900) keep concurrent generation/QC reservations within an 8,000-token budget; raise them only when the provider quota supports it.
 - TAVILY_API_KEY, GOOGLE_BOOKS_API_KEY, YOUTUBE_API_KEY: research credentials.
 - OPENALEX_MAILTO, CROSSREF_MAILTO: optional polite-pool contact addresses for scholarly APIs.
 - SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD, SMTP_FROM: optional password-reset email delivery.
