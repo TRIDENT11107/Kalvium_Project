@@ -17,7 +17,7 @@ router=APIRouter(prefix="/api/auth",tags=["authentication"])
 def register(payload:Credentials,db:Session=Depends(get_db)):
     email=payload.email.lower()
     if db.query(User).filter_by(email=email).first(): raise HTTPException(409,"An account with this email already exists")
-    user=User(email=email,password_hash=hash_password(payload.password)); db.add(user); db.commit(); db.refresh(user)
+    user=User(full_name=payload.full_name.strip(),email=email,password_hash=hash_password(payload.password)); db.add(user); db.commit(); db.refresh(user)
     return {"access_token":make_token(user),"user":user}
 @router.post("/login",response_model=TokenOut)
 def login(payload:Credentials,db:Session=Depends(get_db)):

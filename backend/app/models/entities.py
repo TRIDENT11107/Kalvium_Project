@@ -9,6 +9,7 @@ def now(): return datetime.now(timezone.utc)
 class User(Base):
     __tablename__="users"
     id: Mapped[int]=mapped_column(primary_key=True)
+    full_name: Mapped[str]=mapped_column(String(160),default="")
     email: Mapped[str]=mapped_column(String(320),unique=True,index=True)
     password_hash: Mapped[str]=mapped_column(String(255))
     password_reset_jti: Mapped[str|None]=mapped_column(String(36),nullable=True)

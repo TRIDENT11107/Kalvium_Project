@@ -124,7 +124,10 @@ Run frontend tests and a production build:
 
 Automated provider tests use mocks. The two exact assignment title/objective samples also run through the API, worker pipeline, both QC layers, revision editing and exports in a mocked end-to-end test. Mock sources exist only in test code. Production/local app persistence is PostgreSQL; API tests use isolated SQLite databases.
 
-The HTTP Requests and Responses sample has been verified end to end with live Groq calls, available research providers, and both independently persisted QC reports. The Introduction to Machine Learning sample remains covered by mocked end-to-end tests; live source availability depends on provider credentials and quotas.
+Provider calls in the automated suite are mocked. Live Groq and research-provider verification depends on configured credentials, provider availability, and quotas; do not treat mocked tests as live-provider verification.
+
+For Render, Upstash Redis, PostgreSQL, and Vercel deployment, see
+[DEPLOYMENT.md](DEPLOYMENT.md).
 
 ## Docker Compose
 

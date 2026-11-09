@@ -32,8 +32,13 @@ def auth(token): return {"Authorization":"Bearer "+token}
 
 def test_health_and_auth(client):
     assert client.get("/health").json()=={"status":"ok"}
-    token=create_account(client)
-    assert client.get("/api/auth/me",headers=auth(token)).json()["email"]=="teacher@example.com"
+    response=client.post("/api/auth/register",json={"full_name":"Teacher Example","email":"teacher@example.com","password":"test-password-123"})
+    assert response.status_code==201
+    token=response.json()["access_token"]
+    account=client.get("/api/auth/me",headers=auth(token)).json()
+    assert account["email"]=="teacher@example.com" and account["full_name"]=="Teacher Example"
+    with SessionLocal() as db:
+        assert db.query(User).filter_by(email="teacher@example.com").one().password_hash.startswith("$argon2")
     assert client.post("/api/auth/login",json={"email":"teacher@example.com","password":"wrong-pass"}).status_code==401
     assert client.post("/api/auth/register",json={"email":"teacher@example.com","password":"test-password-123"}).status_code==409
 

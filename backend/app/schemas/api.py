@@ -1,6 +1,7 @@
 from pydantic import BaseModel, EmailStr, Field, ConfigDict, field_validator
 from typing import Any, Literal
 class Credentials(BaseModel):
+    full_name: str = Field(default="", max_length=160)
     email: EmailStr
     password: str=Field(min_length=8,max_length=128)
 class ResetRequest(BaseModel):
@@ -11,6 +12,7 @@ class ResetConfirm(BaseModel):
 class UserOut(BaseModel):
     model_config=ConfigDict(from_attributes=True)
     id:int
+    full_name:str
     email:str
 class TokenOut(BaseModel):
     access_token:str

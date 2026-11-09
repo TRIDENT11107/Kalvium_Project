@@ -1,4 +1,6 @@
 from io import BytesIO
+from pathlib import Path
+from tempfile import TemporaryDirectory
 from zipfile import ZipFile
 from xml.etree import ElementTree
 
@@ -36,3 +38,13 @@ def test_docx_contains_editable_text_and_hyperlink():
     text=" ".join(node.text or "" for node in root.iter() if node.tag.endswith("}t"))
     assert "Export lesson" in text and "Official source" in text
     assert b"https://example.test/docs" in relationships
+
+
+def test_exports_are_generated_in_memory_without_files():
+    with TemporaryDirectory() as directory:
+        before=set(Path(directory).iterdir())
+        pdf=export_pdf(lesson(),{}, {})
+        docx=export_docx(lesson(),{}, {})
+        assert pdf[:4]==b"%PDF"
+        assert docx[:2]==b"PK"
+        assert set(Path(directory).iterdir())==before
